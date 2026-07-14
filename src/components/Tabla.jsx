@@ -112,11 +112,16 @@ function Tabla(){
 
     function cambiarPagina(nueva, nuevoLimite = limite){
         setPagina(nueva);
+        const params = new URLSearchParams(window.location.search);
+
+        params.set("vista","tabla");
+        params.set("page", nueva);
+        params.set("limit", nuevoLimite);
 
         window.history.pushState(
             {},
             "",
-            `?page=${nueva}&limit=${nuevoLimite}`
+            `?${params.toString()}`
         );
     }
 
@@ -290,16 +295,11 @@ function Tabla(){
                 value={limite}
                 onChange={
                     e=>{
-
                         const nuevoLimite = Number(e.target.value);
-
 
                         setLimite(nuevoLimite);
 
-
                         cambiarPagina(1,nuevoLimite);
-
-
                     }
                 }
             >
@@ -307,7 +307,6 @@ function Tabla(){
                 <option>20</option>
                 <option>40</option>
                 <option>50</option>
-
             </select>
 
             <button onClick={abrirAgregar}>
@@ -315,105 +314,90 @@ function Tabla(){
             </button>
 
         </div>
-
         <table>
+            <thead>
+                <tr>
+                    <th>
+                        Nombre
+                    </th>
 
-        <thead>
+                    <th>
+                        Cocina
+                    </th>
 
-        <tr>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
 
-            <th>
-                Nombre
-            </th>
+            <tbody>
+                {
+                recetasFiltradas.map(receta=>
 
-            <th>
-                Cocina
-            </th>
+                <tr key={receta.id}>
+                    <td>
+                        {receta.name}
+                    </td>
 
-            <th>
-                Acciones
-            </th>
+                    <td>
+                        {receta.cuisine}
+                    </td>
 
-        </tr>
+                    <td>
+                        <button onClick={()=>{
+                            setMensaje("");
+                            setRecetaActual(receta);
+                            setFormulario({
+                                name:receta.name,
+                                cuisine:receta.cuisine
+                            });
 
-        </thead>
+                            setModal("editar");
+                        }}
+                        >
+                            Editar
+                        </button>
 
-        <tbody>
-
-        {
-        recetasFiltradas.map(receta=>
-
-        <tr key={receta.id}>
-
-            <td>
-                {receta.name}
-            </td>
-
-            <td>
-                {receta.cuisine}
-            </td>
-
-            <td>
-            <button onClick={()=>{
-                setMensaje("");
-                setRecetaActual(receta);
-                setFormulario({
-                    name:receta.name,
-                    cuisine:receta.cuisine
-                });
-
-                setModal("editar");
-            }}
-            >
-                Editar
-            </button>
-
-            <button onClick={()=>{
-            setRecetaActual(receta);
-            setModal("eliminar");
-            }}
-            >
-                Eliminar
-            </button>
-
-            </td>
-
-        </tr>
-
-        )
-        }
-        </tbody>
+                        <button onClick={()=>{
+                        setRecetaActual(receta);
+                        setModal("eliminar");
+                        }}
+                        >
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+                )
+                }
+            </tbody>
 
         </table>
-
         <div className="paginacion">
+            <button
+            disabled={pagina===1}
+            onClick={()=>
+                cambiarPagina(pagina-1)
+            }
+            >
+                Anterior
+            </button>
 
-    <button
-    disabled={pagina===1}
-    onClick={()=>
-        cambiarPagina(pagina-1)
-    }
-    >
-        Anterior
-    </button>
+            <span>
+                Página {pagina} de {totalPaginas}
+            </span>
 
-    <span>
-        Página {pagina} de {totalPaginas}
-    </span>
+            <button
+            disabled={pagina >= totalPaginas}
+            onClick={()=>
+                cambiarPagina(pagina+1)
+            }
 
-    <button
+            >
+                Siguiente
+            </button>
 
-    disabled={pagina >= totalPaginas}
-
-    onClick={()=>
-        cambiarPagina(pagina+1)
-    }
-
-    >
-        Siguiente
-    </button>
-
-</div>
+        </div>
         <Modal
             mostrar={
             modal!==""
@@ -509,7 +493,7 @@ function Tabla(){
                 </p>
 
                 }
-
+                
             <input
 
             placeholder="Nombre"
