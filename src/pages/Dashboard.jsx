@@ -1,30 +1,62 @@
+import { useState } from "react";
+
 import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
+
 import Pomodoro from "../components/Pomodoro";
 import Estadisticas from "../components/Estadisticas";
 import Tareas from "../components/Tareas";
-import Navbar from "../components/Navbar";
+import Tabla from "../components/Tabla";
 
 import "../css/dashboard.css";
 
-
 function Dashboard(){
 
-    return (
-        <div className="dashboard">
-            <Sidebar/>
-            <main className="contenido">
-                <Navbar/>
-                <section className="paneles">
-                    <Pomodoro/>
-                    <div className="derecha">
-                        <Estadisticas/>
-                        <Tareas/>
-                    </div>
-                </section>
-            </main>
-        </div>
-    )
-}
+    const [vista, setVista] = useState("inicio");
 
+    return(
+
+        <div className="dashboard">
+
+            <Sidebar
+                vista={vista}
+                setVista={setVista}
+            />
+
+            <main className="contenido">
+
+                <Navbar/>
+
+                {
+
+                    vista==="inicio" ?
+
+                    <section className="paneles">
+
+                        <Pomodoro/>
+
+                        <div className="derecha">
+
+                            <Estadisticas/>
+
+                            <Tareas/>
+
+                        </div>
+
+                    </section>
+
+                    :
+
+                    <Tabla/>
+
+                }
+
+            </main>
+
+        </div>
+
+    )
+
+}
 
 export default Dashboard;
