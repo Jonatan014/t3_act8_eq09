@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -6,6 +8,8 @@ function Login() {
     const [mostrarPassword, setMostrarPassword] = useState(false);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    const { login } = useAuth();
 
     const validar = () => {
         if (username.trim().length === 0) {
@@ -44,6 +48,8 @@ function Login() {
 
             const data = await respuesta.json();
             console.log("Login exitoso:", data);
+            login(data, data.token);
+            navigate("/dashboard");
         } catch (err) {
             setError(err.message);
         } finally {

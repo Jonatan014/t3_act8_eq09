@@ -1,0 +1,184 @@
+body{
+    margin:0;
+    font-family:Arial;
+}
+
+
+.dashboard{
+    display:flex;
+    height:100vh;
+    background:
+    linear-gradient(
+        120deg,
+        #df9180,
+        #e8c477,
+        #50a9aa
+    );
+}
+
+.sidebar{
+    width:220px;
+    background:#17345c;
+    color:white;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+}
+
+.sidebar button{
+    margin:5px;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#69c7b9;
+}
+
+.contenido{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+}
+
+.navbar{
+    background:#17345c;
+    color:white;
+    padding:15px 30px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar-content{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    max-width:100%;
+}
+
+.navbar h1{
+    margin:0;
+    font-size:24px;
+}
+
+.user-profile{
+    position:relative;
+}
+
+.profile-button{
+    background:#69c7b9;
+    color:#17345c;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:bold;
+    transition:background 0.3s;
+}
+
+.profile-button:hover{
+    background:#5ab8aa;
+}
+
+.user-name{
+    font-size:14px;
+}
+
+.dropdown-icon{
+    font-size:12px;
+}
+
+.dropdown-menu{
+    position:absolute;
+    top:100%;
+    right:0;
+    background:white;
+    color:#333;
+    border-radius:8px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    min-width:200px;
+    margin-top:10px;
+    z-index:1000;
+}
+
+.user-info{
+    padding:15px;
+    border-bottom:1px solid #eee;
+}
+
+.user-info p{
+    margin:5px 0;
+    font-size:14px;
+}
+
+.logout-button{
+    width:100%;
+    background:#df9180;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:0 0 8px 8px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:background 0.3s;
+}
+
+.logout-button:hover{
+    background:#c87f70;
+}
+
+
+.paneles{
+    display:flex;
+    gap:40px;
+    padding:30px;
+}
+
+.pomodoro{
+    background:white;
+    width:500px;
+    height:410px;
+    border-radius:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center
+}
+
+
+.circulo{
+    border:8px solid #17345c;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    text-align:center;
+}
+
+.derecha{
+    width:400px;
+}
+
+
+.estadisticas,
+.tareas{
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+
+.cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+
+.cards div{
+    border:1px solid;
+    padding:20px;
+    border-radius:15px;
+    display:flex;
+    flex-direction:column;
+}
