@@ -7,7 +7,7 @@ import {
     agregarReceta,
     editarReceta,
     eliminarReceta
-} from "../services/api";
+} from "../services/Api";
 
 function Tabla(){
 
@@ -493,7 +493,7 @@ function Tabla(){
                 </p>
 
                 }
-                
+
             <input
 
             placeholder="Nombre"
