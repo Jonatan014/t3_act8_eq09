@@ -13,7 +13,7 @@ function App(){
 
         <AuthProvider>
 
-            <BrowserRouter>
+            <BrowserRouter basename="/t3_act8_eq09">
 
                 <Routes>
 
